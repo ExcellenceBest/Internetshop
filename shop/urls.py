@@ -9,6 +9,7 @@ import main.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', main.views.main),
+    path('main/registration/', main.views.registration),
     path('basket/', basket.views.main),
     path('contacts/', contacts.views.main),
     path('catalog/', catalog.views.main),

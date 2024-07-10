@@ -1,3 +1,9 @@
+    .t1 {
+        background-image: url("https://kalix.club/uploads/posts/2023-12/1702889783_kalix-club-p-salon-krasoti-fon-krasivo-foni-1.jpg");
+    }
     body {
-        background-color: antiquewhite;
+       background-color: rgb(248, 208, 208); 
+    }
+    #p {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
     }

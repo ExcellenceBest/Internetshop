@@ -1,8 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpRequest
 
 
-def main(request):
-    return HttpResponse(
-        """ <h1> Котакты</h1>"""
-    )
+def main(request: HttpRequest):
+    return render(request, 'contacts.html')
