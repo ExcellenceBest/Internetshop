@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 
 import basket.views
 import catalog.views
@@ -8,9 +8,13 @@ import main.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main/', main.views.main),
-    path('main/registration/', main.views.registration),
-    path('basket/', basket.views.main),
-    path('contacts/', contacts.views.main),
-    path('catalog/', catalog.views.main),
+    path('', main.views.main),
+    path('main/', include('main.urls')),
+    path('basket/', include('basket.urls')),
+    path('contacts/', include('contacts.urls')),
+    path('catalog/', include('catalog.urls')),
+    re_path(r'^main/', main.views.redirect),
+    re_path(r'^catalog/', catalog.views.redirect),
+    re_path(r'^basket/', basket.views.redirect),
+    re_path(r'^contacts/', contacts.views.redirect),
 ]

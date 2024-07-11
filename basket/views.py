@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpRequest
 
 
-def main(request):
-    return HttpResponse(
-        """<h1>Добро пожаловать в корзину</h1>"""
-    )
+def main(request: HttpRequest):
+    return render(request, 'basket.html')
+
+def redirect(request: HttpRequest):
+    return render(request, '404.html')

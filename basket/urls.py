@@ -3,5 +3,5 @@ from basket.views import main
 
 
 urlpatterns = [
-    path('basket/', main)
+    path('', main)
 ]
