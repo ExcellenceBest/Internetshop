@@ -1,15 +1,15 @@
-{% for book in data %}
+{% for product in data %}
           <div class="col-6">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img src="{% static 'img/1.jpg' %}" class="img-fluid rounded-start" alt="...">
+                    <img src="https://avatars.mds.yandex.net/i?id=984a58be1a9c0c1f73c64c5b3b71c3475769ab76-12585840-images-thumbs&n=13">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title">{{ book.title }}</h5>
-                      <p class="card-text"> {{ book.description|slice:"0:100"|add:"..." }} </p>
-                      <p class="card-text"><small class="text-muted">Сейчас читают: {{ book.count_load }}</small></p>
+                      <h5 class="card-title">{{ product.title }}</h5>
+                      <p class="card-text"> {{ product.description|slice:"0:100"|add:"..." }} </p>
+                      <p class="card-text"><small class="text-muted">В наличии: {{ product.quantity }}</small></p>
                     </div>
                   </div>
                 </div>
