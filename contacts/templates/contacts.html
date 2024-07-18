@@ -5,6 +5,10 @@
 {% block localstyle %}
     <link href="{% static 'styles/book_style.css' %}" rel="stylesheet">
 {% endblock %}
+     {% block title %}
+                <div class="d-flex justify-content-center"><h1> Контакты</h1></div>
+          </div>
+            {% endblock %}
 
 {% block headercontent %}
 
@@ -16,10 +20,11 @@
   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
 </div>
 <div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+  <label for="exampleFormControlTextarea1" class="form-label"><h3><p>Здесь вы можете оставить свой отзыв!!!</p></h3></label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>
-<div class="d-flex justify-content-center"><h3><p>Здесь вы можете оставить свой отзыв!!!</p></h3></div>
     
-
+<div class="col">
+      <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6b66280b83cdf1611d547ce5796e33a51a5b5e1228da0a1fe5beb70106635ee7&width=759&height=543&lang=ru_RU&scroll=true"></script>
+    </div>
 {% endblock %}
