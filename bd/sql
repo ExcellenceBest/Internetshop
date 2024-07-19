@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS blonds;
+
+CREATE TABLE IF NOT EXISTS blonds (
+	foto_id SERIAL PRIMARY KEY,
+	title TEXT NOT NULL CHECK(LENGTH(title) > 0),
+	description TEXT NOT NULL DEFAULT 'Без описания',
+	work_time INTEGER NOT NULL CHECK(work_time BETWEEN 1 and 6) DEFAULT 3,
+	url text NOT NULL CHECK(LENGTH(url) > 0)
+);
+
+INSERT INTO blonds(title, description, work_time, url)
+VALUES
+('Болояж', 'Окрашивание специальной техникой', 3, 'img/foto_1.png'),
+('Пепельный блонд', 'Окрашивание порошком', 4, 'img/foto_2.png'),
+('Айртач', 'Окрашивание специальной техникой', 3, 'img/foto_3.png');
