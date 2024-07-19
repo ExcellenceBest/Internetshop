@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from catalog.database import DBConnect, ProductsContainer, PGProductsManager
-from catalog.products import ProductBuilder
-
+from basket.database import DBConnect, ProductsContainer
 
 def main(request: HttpRequest):
     connect = DBConnect.get_connect(dbname='shop',
@@ -31,7 +29,7 @@ def main(request: HttpRequest):
         "count": count,
     }
 
-    return render(request, template_name='catalog.html', context=context)
+    return render(request, template_name='basket.html', context=context)
 
 
 # def get_by_genre(request: HttpRequest, genre=None):

@@ -1,144 +1,27 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from catalog.database import DBConnect, ProductsContainer, PGProductsManager
-from catalog.products import ProductBuilder
+
 
 
 def main(request: HttpRequest):
-    connect = DBConnect.get_connect(dbname='shop',
-                                    host='localhost',
-                                    port=5432,
-                                    user='postgres',
-                                    password='week0497')
+    foto = {
+        'Болояж на короткие волосы': "https://avatars.mds.yandex.net/i?id=7d1d3280b2c6393280fe8f55a0f3016c676661f66b90c621-5859721-images-thumbs&n=13",
+        'Пепелный блонд': 'https://avatars.mds.yandex.net/i?id=e253e5961f68c1179e6f4a04d0c8edc652d9fb33-9875416-images-thumbs&n=13',
+        'Айртач': 'https://avatars.mds.yandex.net/i?id=6c547020a3a6195478b19687b849b48255f7ba25-11386386-images-thumbs&n=13',
+        '4': 'https://avatars.mds.yandex.net/i?id=7ed4105ed14ed965035779d2c784bf283f60774b-9882341-images-thumbs&n=13',
+        '5': 'https://avatars.mds.yandex.net/i?id=7c0e5523a3b670ef674cddc1c6ad91777d09571a-7663003-images-thumbs&n=13',
+        '6': 'https://avatars.mds.yandex.net/i?id=ba5e7efc411db4f5664824b19bc6329958aa7ac2-9227286-images-thumbs&n=13'
+    }
 
-    cursor = connect.cursor()
-    query = """ SELECT * FROM shampoo """
-    cursor.execute(query)
-    container = ProductsContainer()
-    container.create_list_product(cursor.fetchall())
-    data = container.get_list_product()
-    count = len(data) if data is not None else 0
-    cursor.close()
 
-    # cursor = connect.cursor()
-    # query = """ SELECT name_genre, translation FROM genres """
-    # cursor.execute(query)
-    # genres = {item[0]: "http://127.0.0.1:8000/catalog/genre/" + item[1] + '/' for item in cursor.fetchall()}
-    # cursor.close()
 
     context = {
-        "data": data,
-        "count": count,
-    }
+            "data": foto,
+
+        }
 
     return render(request, template_name='catalog.html', context=context)
 
-
-# def get_by_genre(request: HttpRequest, genre=None):
-#     connect = DBConnect.get_connect(dbname='library',
-#                                     host='localhost',
-#                                     port=5432,
-#                                     user='postgres',
-#                                     password='postgres')
-#
-#     cursor = connect.cursor()
-#     query = """ SELECT name_genre, translation FROM genres """
-#     cursor.execute(query)
-#     data = cursor.fetchall()
-#     genre_data = {item[0]: item[1] for item in data}
-#     genres = {item[0]: "http://127.0.0.1:8000/catalog/genre/" + item[1] + '/' for item in data}
-#     cursor.close()
-#
-#     if genre not in genre_data.values():
-#
-#         context = {
-#             'count': 0,
-#             'genres': genres,
-#         }
-#
-#         return render(request,
-#                       template_name='books.html',
-#                       context=context)
-#     else:
-#         params = (genre, )
-#         query = """ SELECT
-#                         books.book_id,
-#                         books.title,
-#                         genres.name_genre,
-#                         books.author,
-#                         books.description,
-#                         books.rating,
-#                         books.count_load
-#                     FROM
-#                         books, genres
-#                     WHERE
-#                         books.genre_id = genres.genre_id and
-#                         genres.translation = %s """
-#
-#         cursor = connect.cursor()
-#         cursor.execute(query, params)
-#         books = cursor.fetchall()
-#
-#         container = ProductsContainer()
-#         container.create_list_product(books)
-#         data = container.get_list_product()
-#         count = len(data) if data is not None else 0
-#         cursor.close()
-#
-#         context = {
-#             "data": data,
-#             "count": count,
-#             "view": view,
-#         }
-#
-#         return render(request,
-#                       template_name='books.html',
-#                       context=context)
-
-
-# def search_item(request):
-#     connect = DBConnect.get_connect(dbname='shop',
-#                                     host='localhost',
-#                                     port=5432,
-#                                     user='postgres',
-#                                     password='week0497')
-#     cursor = connect.cursor()
-#     query = """ SELECT name_genre, translation FROM genres """
-#     cursor.execute(query)
-#     genres = {item[0]: "http://127.0.0.1:8000/catalog/genre/" + item[1] + '/' for item in cursor.fetchall()}
-#     cursor.close()
-#
-#     if request.method == "GET":
-#         title = request.GET.get('title', '')
-#
-#         if not title:
-#             context = {
-#                 'count': 0,
-#                 'genres': genres,
-#             }
-#         else:
-#             connect = DBConnect.get_connect(dbname='shop',
-#                                             host='localhost',
-#                                             port=5432,
-#                                             user='postgres',
-#                                             password='postgres')
-#
-#             builder = ProductBuilder()
-#             builder.create()
-#             builder.set_title(title)
-#             book = builder.get_product()
-#             data = PGProductsManager.read(connect, book)
-#             count = len(data) if data is not None else 0
-#             context = {
-#                 'data': data,
-#                 'count': count,
-#                 'view': view,
-#             }
-#
-#         return render(request,
-#                       template_name='catalog.html',
-#                       context=context)
-#
 
 def redirect(request: HttpRequest):
     return render(request, '404.html')

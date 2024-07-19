@@ -1,0 +1,16 @@
+{% for text, url in data.items %}
+          <div class="col-4">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="card-body">
+                            <p style="color: blue">Время работы мастера{{x}}</p>
+                        </div>
+                <div style="margin-left: 30px" class="row g-0">
+                        <div class="col-md-4">
+                            <img src={{url}}> {{text}}
+                        </div>
+                    <div class="col-md-8">
+                    </div>
+                </div>
+            </div>
+          </div>
+{% endfor %}

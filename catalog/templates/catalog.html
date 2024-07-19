@@ -6,21 +6,8 @@
 {% endblock %}
 
 {% block content %}
-<nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
 
                     <div class="row">
-                      {% if count > 0 %}
-                            {% include "item.html" %}
-                        {% else %}
-                            <h4> По вашему запросу ничего не найдено </h4>
-                        {% endif %}
+                        {% include "foto.html" %}
                     </div>
 {% endblock %}
