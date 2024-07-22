@@ -1,20 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block localstyle %}
-<link href="{% static 'styles/mainstyle.css' %}" rel="stylesheet">
-{% endblock %}
-
 {% block content %}
-<nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand">Navbar</a>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+
+    <div style="padding: 20px;" class="container">
+        <div class="row">
+            <div class="col-2">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                  </li>
+                    {% for text, url in data.items %}
+                  <li class="nav-item">
+                    <a class="nav-link"></a> {{ url }}{{ text }}
+                  </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-10">
+              <div class="container">
 
                     <div class="row">
                       {% if count > 0 %}

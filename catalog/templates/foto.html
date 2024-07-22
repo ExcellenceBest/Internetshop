@@ -1,14 +1,13 @@
 {% load static %}
-{% for text, url in data.items %}
+{% for text, url in data.items  %}
           <div class="col-4">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="card-body">
-                            <p style="color: blue">Время работы мастера{{x}}</p>
+                            <p style="color: blue">Время работы мастера{{х}}</p>
                         </div>
                 <div style="margin-left: 30px" class="row g-0">
                         <div class="col-md-4">
                             <img src={{url}}> {{text}}
-<!--                            <img src="{% static 'img/foto_1.png' %}">-->
                         </div>
                     <div class="col-md-8">
                     </div>
@@ -16,3 +15,22 @@
             </div>
           </div>
 {% endfor %}
+<!--{% for product in data %}-->
+<!--          <div style="padding-top: 50px" class="col-4">-->
+<!--            <div class="card mb-3" style="max-width: 540px; border: 2px solid blue">-->
+<!--                <div style="margin-left: 100px" class="row g-0">-->
+<!--                  <div class="col-md-4">-->
+<!--                    <img src="https://avatars.mds.yandex.net/i?id=6c547020a3a6195478b19687b849b48255f7ba25-11386386-images-thumbs&n=13">-->
+<!--                  </div>-->
+<!--                  <div class="col-md-12">-->
+<!--                    <div class="card-body">-->
+<!--                      <h5 class="card-title">{{ product.title }}</h5>-->
+<!--                      <p class="card-text"> {{ product.description|slice:"0:100"|add:"..." }} </p>-->
+<!--                        <p style="color: blue">Время работы мастера{{ product.work_time }}</p>-->
+<!--                      <p class="card-text"><small class="text-muted">В наличии: {{product.quantity}}</small><button style="margin-left: 200px" type="submit" class="btn btn-outline-primary">В корзину</button></p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--{% endfor %}-->

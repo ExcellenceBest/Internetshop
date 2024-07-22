@@ -6,11 +6,9 @@ class Product:
     def __init__(self):
 
         self.title = None
-        self.view = None
-        self.manufacturer = None
         self.description = None
-        self.price = None
-        self.quantity = None
+        self.work_time = None
+        self.url = None
 
 
 class Builder(ABC):
@@ -24,23 +22,15 @@ class Builder(ABC):
         ...
 
     @abstractmethod
-    def set_view(self, view):
-        ...
-
-    @abstractmethod
-    def set_manufacturer(self, manufacturer):
-        ...
-
-    @abstractmethod
     def set_description(self, description):
         ...
 
     @abstractmethod
-    def set_price(self, price):
+    def set_work_time(self, work_time):
         ...
 
     @abstractmethod
-    def set_quantity(self, quantity):
+    def set_url(self, url):
         ...
 
     @abstractmethod
@@ -58,20 +48,14 @@ class ProductBuilder(Builder):
     def set_title(self, title):
         self._product.title = title
 
-    def set_view(self, view):
-        self._product.view = view
-
-    def set_manufacturer(self, manufacturer):
-        self._product.manufacturer = manufacturer
-
     def set_description(self, description):
         self._product.description = description
 
-    def set_price(self, price):
-        self._product.price = price
+    def set_work_time(self, work_time):
+        self._product.work_time = work_time
 
-    def set_quantity(self, quantity):
-        self._product.quantity = quantity
+    def set_url(self, url):
+        self._product.url = url
 
     def get_product(self):
         return self._product
@@ -88,9 +72,9 @@ class ProductCreator:
     def make(self, product: tuple) -> Product:
         self._builder.create()
         self._builder.set_title(product[1])
-        self._builder.set_view(product[2])
-        self._builder.set_manufacturer(product[3])
-        self._builder.set_description(product[4])
+        self._builder.set_description(product[2])
+        self._builder.set_work_time(product[3])
+        self._builder.set_url(product[4])
         return self._builder.get_product()
 
 
