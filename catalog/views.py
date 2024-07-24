@@ -41,8 +41,6 @@ def main(request: HttpRequest):
         'Сложное окрашивание': 'https://avatars.mds.yandex.net/i?id=ba5e7efc411db4f5664824b19bc6329958aa7ac2-9227286-images-thumbs&n=13'
     }
 
-
-
     context = {
             "data": foto,
 
