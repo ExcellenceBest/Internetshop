@@ -9,6 +9,10 @@ def main(request: HttpRequest):
 def redirect(request: HttpRequest):
     return render(request, '404.html')
 
+def registration(request: HttpRequest):
+
+    return render(request, 'reg.html')
+
 def registr(request: HttpRequest):
     connect = DBConnect.get_connect(dbname='clients',
                                     host='localhost',
@@ -49,6 +53,5 @@ def registr(request: HttpRequest):
 
 
 
-    return render(request,
-                          template_name='home.html', context=context)
+    return render(request, template_name='home.html', context=context)
 
