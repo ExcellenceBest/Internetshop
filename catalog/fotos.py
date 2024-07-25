@@ -9,6 +9,7 @@ class Product:
         self.description = None
         self.work_time = None
         self.url = None
+        self.counter = None
 
 
 class Builder(ABC):
@@ -31,6 +32,10 @@ class Builder(ABC):
 
     @abstractmethod
     def set_url(self, url):
+        ...
+
+    @abstractmethod
+    def set_counter(self, counter):
         ...
 
     @abstractmethod
@@ -57,6 +62,9 @@ class ProductBuilder(Builder):
     def set_url(self, url):
         self._product.url = url
 
+    def set_counter(self, counter):
+        self._product.counter = counter
+
     def get_product(self):
         return self._product
 
@@ -75,6 +83,7 @@ class ProductCreator:
         self._builder.set_description(product[2])
         self._builder.set_work_time(product[3])
         self._builder.set_url(product[4])
+        self._builder.set_counter(product[5])
         return self._builder.get_product()
 
 

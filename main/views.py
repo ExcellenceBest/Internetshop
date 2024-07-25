@@ -29,16 +29,6 @@ def registr(request: HttpRequest):
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
 
-        # builder = ProductBuilder()
-        # builder.create()
-        # builder.set_title(name)
-        # builder.set_view(last_name)
-        # builder.set_manufacturer(age)
-        # builder.set_description(phone)
-        # builder.set_price(email)
-        # builder.set_quantity(password)
-        # product = builder.get_product()
-
     params = (name, last_name, age, phone, email, password)
     query = """ INSERT INTO reg(first_name, last_name, age, phone, email, pass)
                              VALUES (%s, %s, %s, %s, %s, %s)"""
@@ -46,12 +36,5 @@ def registr(request: HttpRequest):
     cursor.execute(query, params)
     connect.commit()
     cursor.close()
-
-    # context = {
-    #     'data': product,
-    #
-    # }
-
-    # return HttpResponse(f"<h2>Name: {name}  Age: {age}</h2>")
     return render(request, template_name='registr.html')
 
