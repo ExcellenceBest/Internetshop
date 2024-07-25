@@ -13,7 +13,7 @@
 <body>
 <button type="button" class="btn btn-outline-primary"><a href="http://127.0.0.1:8000/main/">На главную</a></button>
 
-<form method="GET" action="registr/" class="row g-3">
+<form method="post" action="registr/" class="row g-3">
     {% csrf_token %}
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Ваше Имя</label>
