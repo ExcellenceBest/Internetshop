@@ -19,6 +19,10 @@ class Builder(ABC):
         ...
 
     @abstractmethod
+    def set_foto_id(self, foto_id):
+        ...
+
+    @abstractmethod
     def set_title(self, title):
         ...
 
@@ -50,6 +54,9 @@ class ProductBuilder(Builder):
     def create(self):
         self._product = Product()
 
+    def set_foto_id(self, foto_id):
+        self._product.foto_id = foto_id
+
     def set_title(self, title):
         self._product.title = title
 
@@ -79,6 +86,7 @@ class ProductCreator:
 
     def make(self, product: tuple) -> Product:
         self._builder.create()
+        self._builder.set_foto_id(product[0])
         self._builder.set_title(product[1])
         self._builder.set_description(product[2])
         self._builder.set_work_time(product[3])

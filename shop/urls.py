@@ -11,6 +11,8 @@ urlpatterns = [
     path('', main.views.main),
     path('registration/', main.views.registration),
     path('registration/registr/', main.views.registr),
+    path('catalog/likes/', catalog.views.likes),
+    path('basket/search_product/', basket.views.search_product),
     path('main/', include('main.urls')),
     path('basket/', include('basket.urls')),
     path('contacts/', include('contacts.urls')),
