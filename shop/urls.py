@@ -13,6 +13,7 @@ urlpatterns = [
     path('registration/registr/', main.views.registr),
     path('catalog/likes/', catalog.views.likes),
     path('basket/search_product/', basket.views.search_product),
+    path('basket/in_basket/', basket.views.in_basket),
     path('main/', include('main.urls')),
     path('basket/', include('basket.urls')),
     path('contacts/', include('contacts.urls')),

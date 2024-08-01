@@ -52,8 +52,8 @@ class PGProductsManager(DBManager):
 
                 params = (product.title, )
                 query = """SELECT * 
-                           FROM products
-                           WHERE title = %s"""
+                           FROM shampoo
+                           WHERE sh_title = %s"""
                 cursor.execute(query, params)
                 data = cursor.fetchall()
 

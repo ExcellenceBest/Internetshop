@@ -30,23 +30,11 @@ def main(request: HttpRequest):
     return render(request, template_name='basket.html', context=context)
 
 
-
-
 def redirect(request: HttpRequest):
     return render(request, '404.html')
 
 
 def search_product(request):
-    connect = DBConnect.get_connect(dbname='shop',
-                                    host='localhost',
-                                    port=5432,
-                                    user='postgres',
-                                    password='week0497')
-    cursor = connect.cursor()
-    query = """ SELECT sh_title, description FROM shampoo """
-    cursor.execute(query)
-    product = {item[0]: "http://127.0.0.1:8000/catalog/" + item[1] + '/' for item in cursor.fetchall()}
-    cursor.close()
 
     if request.method == "POST":
         title = request.POST.get('title', '')
@@ -54,10 +42,10 @@ def search_product(request):
         if not title:
             context = {
                 'count': 0,
-                'products': product,
+
             }
         else:
-            connect = DBConnect.get_connect(dbname='work',
+            connect = DBConnect.get_connect(dbname='shop',
                                             host='localhost',
                                             port=5432,
                                             user='postgres',
@@ -76,5 +64,22 @@ def search_product(request):
             }
 
         return render(request,
-                      template_name='basket1.html',
+                      template_name='basket.html',
                       context=context)
+
+def in_basket(request: HttpRequest):
+    connect = DBConnect.get_connect(dbname='shop',
+                                    host='localhost',
+                                    port=5432,
+                                    user='postgres',
+                                    password='week0497')
+
+    cursor = connect.cursor()
+    quantity = request.POST.get('quantity', '')
+    query = """ UPDATE blonds
+                SET quantity = quantity - 1
+                WHERE counter = %s"""
+    cursor.execute(query, quantity)
+    cursor.close()
+    connect.commit()
+    return render(request, 'end_pay.html')
