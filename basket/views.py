@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 from basket.database import DBConnect, PGProductsManager
-from basket.products import ProductsContainer, ProductBuilder
+from basket.products import ProductsContainer, ProductBuilder, ProductCreator
 
 
 def main(request: HttpRequest):
     try:
-        connect_1 = DBConnect.get_connect(dbname='shop',
+        connect = DBConnect.get_connect(dbname='shop',
                                         host='localhost',
                                         port=5432,
                                         user='postgres',
                                         password='week0497')
 
-        cursor = connect_1.cursor()
+        cursor = connect.cursor()
         query = """ SELECT * FROM shampoo """
         cursor.execute(query)
         container = ProductsContainer()
@@ -46,10 +46,10 @@ def search_product(request):
             }
         else:
             connect_2 = DBConnect.get_connect(dbname='shop',
-                                            host='localhost',
-                                            port=5432,
-                                            user='postgres',
-                                            password='week0497')
+                                              host='localhost',
+                                              port=5432,
+                                              user='postgres',
+                                              password='week0497')
 
             builder = ProductBuilder()
             builder.create()
@@ -68,18 +68,33 @@ def search_product(request):
                       context=context)
 
 def in_basket(request: HttpRequest):
-    connect_3 = DBConnect.get_connect(dbname='shop',
+    connect = DBConnect.get_connect_3(dbname='shop',
                                     host='localhost',
                                     port=5432,
                                     user='postgres',
                                     password='week0497')
 
-    cursor = connect_3.cursor()
-    quantity = request.POST.get('quantity', '')
-    query = """ UPDATE blonds
+    cursor = connect.cursor()
+    product_id = request.POST.get('product_id', '')
+    query = """ UPDATE shampoo
                 SET quantity = quantity - 1
-                WHERE counter = %s"""
-    cursor.execute(query, quantity)
+                WHERE shampoo_id = shampoo_id """
+    cursor.execute(query, product_id)
     cursor.close()
-    connect_3.commit()
+    cursor = connect.cursor()
+    query = """ SELECT *
+                    FROM shampoo
+                    WHERE shampoo_id = shampoo_id """
+    cursor.execute(query, product_id)
+    container = ProductsContainer()
+    container.create_list_product(cursor.fetchall())
+    data = container.get_list_product()
+    cursor.close()
+    cursor = connect.cursor()
+    query = """ INSERT INTO basket(shampoo_id, sh_title, sh_view, manufacturer, description, price, quantity)
+                                 VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    print(data)
+    cursor.execute(query, data)
+    cursor.close()
+    connect.commit()
     return render(request, 'end_pay.html')

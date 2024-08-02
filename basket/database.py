@@ -6,6 +6,8 @@ import psycopg2
 class DBConnect:
 
     _instance = None
+    _instance_2 = None
+    _instance_3 = None
 
     @classmethod
     def get_connect(cls, *args, **kwargs):
@@ -13,6 +15,17 @@ class DBConnect:
             cls._instance = psycopg2.connect(*args, **kwargs)
         return cls._instance
 
+    @classmethod
+    def get_connect_2(cls, *args, **kwargs):
+        if cls._instance_2 is None:
+            cls._instance_2 = psycopg2.connect(*args, **kwargs)
+        return cls._instance_2
+
+    @classmethod
+    def get_connect_3(cls, *args, **kwargs):
+        if cls._instance_3 is None:
+            cls._instance_3 = psycopg2.connect(*args, **kwargs)
+        return cls._instance_3
 
 class DBManager(ABC):
 

@@ -12,7 +12,7 @@
                       <p class="card-text"><small class="text-muted">В наличии: {{product.quantity}}</small>
                           <form method="POST" action="in_basket/">
                             {% csrf_token %}
-                          <button name="quantity" value="{{product.quantity}}" style="margin-left: 200px" type="submit" class="btn btn-outline-primary">В корзину</button>
+                          <button name="product_id" value="{{product.product_id}}" style="margin-left: 200px" type="submit" class="btn btn-outline-primary">В корзину</button>
                     </form>
                     </div>
                   </div>

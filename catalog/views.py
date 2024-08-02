@@ -4,7 +4,7 @@ from basket.database import DBConnect
 from catalog.fotos import ProductsContainer
 
 def main(request: HttpRequest):
-    connect1 = DBConnect.get_connect(dbname='works',
+    connect1 = DBConnect.get_connect_2(dbname='works',
                                      host='localhost',
                                      port=5432,
                                      user='postgres',
@@ -29,7 +29,7 @@ def redirect(request: HttpRequest):
     return render(request, '404.html')
 
 def likes(request: HttpRequest):
-    connect = DBConnect.get_connect(dbname='works',
+    connect = DBConnect.get_connect_3(dbname='works',
                                     host='localhost',
                                     port=5432,
                                     user='postgres',
@@ -43,4 +43,5 @@ def likes(request: HttpRequest):
     cursor.execute(query, foto_id)
     cursor.close()
     connect.commit()
+    # return redirect('catalog/')
     return render(request, 'end_voice.html')
