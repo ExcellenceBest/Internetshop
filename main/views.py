@@ -31,7 +31,7 @@ def registr(request: HttpRequest):
             password = request.POST.get('password', '')
 
         params = (name, last_name, age, phone, email, password)
-        query = """ INSERT INTO reg(first_name, last_name, age, phone, email, pass)
+        query = """ INSERT INTO cls(first_name, last_name, age, phone, email, pass)
                                  VALUES (%s, %s, %s, %s, %s, %s)"""
 
         cursor.execute(query, params)
