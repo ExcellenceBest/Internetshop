@@ -27,6 +27,10 @@ class DBConnect:
             cls._instance_3 = psycopg2.connect(*args, **kwargs)
         return cls._instance_3
 
+    @classmethod
+    def get_connect_all(cls, *args, **kwargs):
+        return psycopg2.connect(*args, **kwargs)
+
 class DBManager(ABC):
 
     @staticmethod

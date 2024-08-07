@@ -6,7 +6,7 @@ from basket.products import ProductsContainer, ProductBuilder, ProductCreator
 
 def main(request: HttpRequest):
     try:
-        connect = DBConnect.get_connect(dbname='shop',
+        connect = DBConnect.get_connect_all(dbname='shop',
                                         host='localhost',
                                         port=5432,
                                         user='postgres',
@@ -45,11 +45,11 @@ def search_product(request):
 
             }
         else:
-            connect_2 = DBConnect.get_connect(dbname='shop',
-                                              host='localhost',
-                                              port=5432,
-                                              user='postgres',
-                                              password='week0497')
+            connect_2 = DBConnect.get_connect_all(dbname='shop',
+                                                host='localhost',
+                                                port=5432,
+                                                user='postgres',
+                                                password='week0497')
 
             builder = ProductBuilder()
             builder.create()
@@ -87,7 +87,7 @@ def in_basket(request: HttpRequest):
                     WHERE shampoo_id = shampoo_id """
     cursor.execute(query, product_id)
     data = cursor.fetchall()
-    params = (data[0], data[1], data[2], data[3], data[4])
+    params = (data[0][0], data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6])
     container = ProductsContainer()
     container.create_list_product(data)
 
