@@ -77,7 +77,7 @@ def in_basket(request: HttpRequest):
     cursor = connect.cursor()
     product_id = request.POST.get('product_id', '')
     query = """ UPDATE shampoo
-                SET quantity = quantity - 1
+                SET quantity = quantity + 1
                 WHERE shampoo_id = shampoo_id """
     cursor.execute(query, product_id)
     cursor.close()
@@ -86,15 +86,18 @@ def in_basket(request: HttpRequest):
                     FROM shampoo
                     WHERE shampoo_id = shampoo_id """
     cursor.execute(query, product_id)
+    data = cursor.fetchall()
+    params = (data[0], data[1], data[2], data[3], data[4])
     container = ProductsContainer()
-    container.create_list_product(cursor.fetchall())
-    data = container.get_list_product()
+    container.create_list_product(data)
+
+
     cursor.close()
     cursor = connect.cursor()
     query = """ INSERT INTO basket(shampoo_id, sh_title, sh_view, manufacturer, description, price, quantity)
                                  VALUES (%s, %s, %s, %s, %s, %s, %s)"""
     print(data)
-    cursor.execute(query, data)
+    cursor.execute(query, params)
     cursor.close()
     connect.commit()
     return render(request, 'end_pay.html')
