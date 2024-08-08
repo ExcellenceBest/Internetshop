@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseRedirect
 from basket.database import DBConnect
 from catalog.fotos import ProductsContainer
 
@@ -11,7 +11,8 @@ def main(request: HttpRequest):
                                      password='week0497')
 
     cursor = connect1.cursor()
-    query = """ SELECT * FROM blonds """
+    query = """ SELECT * FROM blonds
+                    ORDER BY foto_id"""
     cursor.execute(query)
     container = ProductsContainer()
     container.create_list_product(cursor.fetchall())
@@ -43,5 +44,5 @@ def likes(request: HttpRequest):
     cursor.execute(query, foto_id)
     cursor.close()
     connect.commit()
-    # return redirect('catalog/')
-    return render(request, 'end_voice.html')
+    return HttpResponseRedirect('/catalog/')
+    #return render(request, 'end_voice.html')
