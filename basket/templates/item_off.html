@@ -9,11 +9,10 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ product.title }}</h5>
                       <p class="card-text"> {{ product.description|slice:"0:100"|add:"..." }} </p>
-                      <p class="card-text"><small class="text-muted">В наличии: {{product.quantity}}</small>
-                        <small class="text-muted">ID: {{product.shampoo_id}}</small>
-                          <form method="POST" action="in_basket/">
+                      <p class="card-text"><small class="text-muted">В корзине: {{product.quantity}}</small>
+                          <form method="POST" action="off_basket/">
                             {% csrf_token %}
-                          <button name="shampoo_id" value="{{product.shampoo_id}}" style="margin-left: 200px" type="submit" class="btn btn-outline-primary">В корзину</button>
+                          <button name="shampoo_id" value="{{product.shampoo_id}}" style="margin-left: 200px" type="submit" class="btn btn-outline-primary">Удалить</button>
                     </form>
                     </div>
                   </div>

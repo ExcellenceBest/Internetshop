@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class Product:
 
     def __init__(self):
-        self.item_id = None
+        self.shampoo_id = None
         self.title = None
         self.view = None
         self.manufacturer = None
@@ -14,7 +14,7 @@ class Product:
 
     def __str__(self):
         return (f'{self.title}'
-                f'{self.item_id}')
+                f'{self.shampoo_id}')
 
 class Builder(ABC):
 
@@ -23,7 +23,7 @@ class Builder(ABC):
         ...
 
     @abstractmethod
-    def set_item_id(self, item_id):
+    def set_shampoo_id(self, shampoo_id):
         ...
 
     @abstractmethod
@@ -62,8 +62,8 @@ class ProductBuilder(Builder):
     def create(self):
         self._product = Product()
 
-    def set_item_id(self, item_id):
-        self._product.item_id = item_id
+    def set_shampoo_id(self, shampoo_id):
+        self._product.shampoo_id = shampoo_id
 
     def set_title(self, title):
         self._product.title = title
@@ -97,7 +97,7 @@ class ProductCreator:
 
     def make(self, product: tuple) -> Product:
         self._builder.create()
-        self._builder.set_item_id([0])
+        self._builder.set_shampoo_id(product[0])
         self._builder.set_title(product[1])
         self._builder.set_view(product[2])
         self._builder.set_manufacturer(product[3])

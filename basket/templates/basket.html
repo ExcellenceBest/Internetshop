@@ -8,13 +8,14 @@
 {% block content %}
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
+<a href="http://127.0.0.1:8000/basket/basket_all/">
 <button type="button" class="btn btn-primary position-relative">
   Ваша Корзина
   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    1
+    {{counter}}
     <span class="visually-hidden">Новых товаров</span>
   </span>
-</button>
+</button></a>
     <form method="POST" action="search_product/" class="d-flex" role="search">
         {% csrf_token %}
       <input name="title" class="form-control me-2" type="search" placeholder="поиск" aria-label="Search">

@@ -14,6 +14,8 @@ urlpatterns = [
     path('catalog/likes/', catalog.views.likes),
     re_path('basket/search_product/\S*', basket.views.search_product),
     path('basket/in_basket/', basket.views.in_basket),
+    path('basket/basket_all/off_basket/', basket.views.off_basket),
+    path('basket/basket_all/', basket.views.basket_all),
     path('main/', include('main.urls')),
     path('basket/', include('basket.urls')),
     path('contacts/', include('contacts.urls')),

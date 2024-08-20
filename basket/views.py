@@ -1,19 +1,21 @@
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseRedirect
 from basket.database import DBConnect, PGProductsManager
-from basket.products import ProductsContainer, ProductBuilder, ProductCreator
+from basket.products import ProductsContainer, ProductBuilder
 
 
-def main(request: HttpRequest):
+def basket_all(request: HttpRequest):
     try:
         connect = DBConnect.get_connect_all(dbname='shop',
-                                        host='localhost',
-                                        port=5432,
-                                        user='postgres',
-                                        password='week0497')
+                                            host='localhost',
+                                            port=5432,
+                                            user='postgres',
+                                            password='week0497')
 
         cursor = connect.cursor()
-        query = """ SELECT * FROM item """
+        query = """ SELECT * FROM basket
+                        WHERE quantity > 0
+                        ORDER BY shampoo_id """
         cursor.execute(query)
         container = ProductsContainer()
         container.create_list_product(cursor.fetchall())
@@ -26,6 +28,45 @@ def main(request: HttpRequest):
     context = {
         "data": data,
         "count": count,
+    }
+
+    return render(request, template_name='basket1.html', context=context)
+
+
+
+def main(request: HttpRequest):
+    try:
+        connect = DBConnect.get_connect_all(dbname='shop',
+                                            host='localhost',
+                                            port=5432,
+                                            user='postgres',
+                                            password='week0497')
+
+        cursor = connect.cursor()
+        query = """ SELECT * FROM shampoo
+                        ORDER BY shampoo_id"""
+        cursor.execute(query)
+        container = ProductsContainer()
+        container.create_list_product(cursor.fetchall())
+        data = container.get_list_product()
+        print(data[0])
+        count = len(data) if data is not None else 0
+        cursor.close()
+        cursor = connect.cursor()
+        query = """ SELECT * FROM basket
+                                WHERE quantity > 0 """
+        cursor.execute(query)
+        container = ProductsContainer()
+        container.create_list_product(cursor.fetchall())
+        data1 = container.get_list_product()
+        counter = len(data1) if data1 is not None else 0
+        cursor.close()
+    except ValueError as e:
+        print(e)
+    context = {
+        "data": data,
+        "count": count,
+        "counter": counter
     }
 
     return render(request, template_name='basket.html', context=context)
@@ -68,39 +109,88 @@ def search_product(request):
                       template_name='basket.html',
                       context=context)
 
+
 def in_basket(request: HttpRequest):
-    connect = DBConnect.get_connect_3(dbname='shop',
-                                      host='localhost',
-                                      port=5432,
-                                      user='postgres',
-                                      password='week0497')
+    connect = DBConnect.get_connect_all(dbname='shop',
+                                    host='localhost',
+                                    port=5432,
+                                    user='postgres',
+                                    password='week0497')
 
-    product_id = request.POST.get('product_id', '')
-
-    # cursor = connect.cursor()
-    # query = """ UPDATE shampoo
-    #             SET quantity = quantity - 1
-    #             WHERE shampoo_id = shampoo_id """
-    # cursor.execute(query, product_id)
-    # cursor.close()
-    param = product_id
     cursor = connect.cursor()
-    query = """ SELECT *
-                    FROM item
-                    WHERE item_id = %s """
-    cursor.execute(query, param)
-    data = cursor.fetchall()
-    print(product_id)
-    params = (data[0][1], data[0][2], data[0][3], data[0][4], data[0][5])
-    container = ProductsContainer()
-    container.create_list_product(data)
+    shampoo_id = request.POST.get('shampoo_id', '')
+    query = """ UPDATE shampoo
+                SET quantity = quantity - 1
+                WHERE shampoo_id = %s """
+    cursor.execute(query, shampoo_id)
     cursor.close()
-
-    # cursor = connect.cursor()
-    # query = """ INSERT INTO basket(sh_title, sh_view, manufacturer, description, price)
-    #                              VALUES (%s, %s, %s, %s, %s)"""
-    # print(data)
-    # cursor.execute(query, params)
-    # cursor.close()
+    cursor = connect.cursor()
+    query = """ UPDATE basket
+                    SET quantity = quantity + 1
+                    WHERE shampoo_id = %s """
+    cursor.execute(query, shampoo_id)
+    cursor.close()
     connect.commit()
-    return render(request, 'end_pay.html')
+    return HttpResponseRedirect('/basket/')
+
+
+def off_basket(request: HttpRequest):
+    connect = DBConnect.get_connect_all(dbname='shop',
+                                    host='localhost',
+                                    port=5432,
+                                    user='postgres',
+                                    password='week0497')
+
+    cursor = connect.cursor()
+    shampoo_id = request.POST.get('shampoo_id', '')
+    query = """ UPDATE basket
+                SET quantity = quantity - 1
+                WHERE shampoo_id = %s """
+    cursor.execute(query, shampoo_id)
+    cursor.close()
+    cursor = connect.cursor()
+    query = """ UPDATE shampoo
+                    SET quantity = quantity + 1
+                    WHERE shampoo_id = %s """
+    cursor.execute(query, shampoo_id)
+    cursor.close()
+    connect.commit()
+    return HttpResponseRedirect('/basket/basket_all/')
+
+
+# def in_basket(request: HttpRequest):
+#     connect = DBConnect.get_connect_3(dbname='shop',
+#                                       host='localhost',
+#                                       port=5432,
+#                                       user='postgres',
+#                                       password='week0497')
+#
+#     product_id = request.POST.get('product_id', '')
+#
+#     # cursor = connect.cursor()
+#     # query = """ UPDATE shampoo
+#     #             SET quantity = quantity - 1
+#     #             WHERE shampoo_id = shampoo_id """
+#     # cursor.execute(query, product_id)
+#     # cursor.close()
+#     param = product_id
+#     cursor = connect.cursor()
+#     query = """ SELECT *
+#                     FROM item
+#                     WHERE item_id = %s """
+#     cursor.execute(query, param)
+#     data = cursor.fetchall()
+#     print(product_id)
+#     params = (data[0][1], data[0][2], data[0][3], data[0][4], data[0][5])
+#     container = ProductsContainer()
+#     container.create_list_product(data)
+#     cursor.close()
+#
+#     # cursor = connect.cursor()
+#     # query = """ INSERT INTO basket(sh_title, sh_view, manufacturer, description, price)
+#     #                              VALUES (%s, %s, %s, %s, %s)"""
+#     # print(data)
+#     # cursor.execute(query, params)
+#     # cursor.close()
+#     connect.commit()
+#     return render(request, 'end_pay.html')

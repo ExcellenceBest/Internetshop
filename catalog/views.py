@@ -45,4 +45,4 @@ def likes(request: HttpRequest):
     cursor.close()
     connect.commit()
     return HttpResponseRedirect('/catalog/')
-    #return render(request, 'end_voice.html')
+
