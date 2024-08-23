@@ -15,11 +15,11 @@ def registration(request: HttpRequest):
 
 def registr(request: HttpRequest):
 
-        connect = DBConnect.get_connect(dbname='clients',
+        connect = DBConnect.get_connect(dbname='shop',
                                         host='localhost',
                                         port=5432,
                                         user='postgres',
-                                        password='week0497')
+                                        password='valera123')
 
         cursor = connect.cursor()
         if request.method == "POST":
@@ -31,7 +31,7 @@ def registr(request: HttpRequest):
             password = request.POST.get('password', '')
 
         params = (name, last_name, age, phone, email, password)
-        query = """ INSERT INTO cls(first_name, last_name, age, phone, email, pass)
+        query = """ INSERT INTO clients(first_name, last_name, age, phone, email, pass)
                                  VALUES (%s, %s, %s, %s, %s, %s)"""
 
         cursor.execute(query, params)
