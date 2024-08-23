@@ -5,9 +5,9 @@
                 <div style="margin-left: -25px" class="row g-5">
                   <div class="col-md-12">
                     <div class="card-body">
-                      <h5 class="card-title">{{ product.title }}</h5>
+<!--                      <h5 class="card-title">{{ product.title }}</h5>-->
                       <p class="card-text"> {{ product.description }} </p>
-                        <p style="color: blue">{{product.work_time}}</p>
+                        <p style="color: blue">{{product.work_time|slice:"0:50"|add:"..." }}</p>
                     </div>
                   </div>
                 </div>
