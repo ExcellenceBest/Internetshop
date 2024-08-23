@@ -10,7 +10,7 @@ def basket_all(request: HttpRequest):
                                             host='localhost',
                                             port=5432,
                                             user='postgres',
-                                            password='week0497')
+                                            password='valera123')
 
         cursor = connect.cursor()
         query = """ SELECT * FROM basket
@@ -20,7 +20,6 @@ def basket_all(request: HttpRequest):
         container = ProductsContainer()
         container.create_list_product(cursor.fetchall())
         data = container.get_list_product()
-        print(data[0])
         count = len(data) if data is not None else 0
         cursor.close()
     except ValueError as e:
@@ -33,14 +32,13 @@ def basket_all(request: HttpRequest):
     return render(request, template_name='basket1.html', context=context)
 
 
-
 def main(request: HttpRequest):
     try:
         connect = DBConnect.get_connect_all(dbname='shop',
                                             host='localhost',
                                             port=5432,
                                             user='postgres',
-                                            password='week0497')
+                                            password='valera123')
 
         cursor = connect.cursor()
         query = """ SELECT * FROM shampoo
@@ -91,7 +89,7 @@ def search_product(request):
                                                 host='localhost',
                                                 port=5432,
                                                 user='postgres',
-                                                password='week0497')
+                                                password='valera123')
 
             builder = ProductBuilder()
             builder.create()
@@ -115,7 +113,7 @@ def in_basket(request: HttpRequest):
                                     host='localhost',
                                     port=5432,
                                     user='postgres',
-                                    password='week0497')
+                                    password='valera123')
 
     cursor = connect.cursor()
     shampoo_id = request.POST.get('shampoo_id', '')
@@ -139,7 +137,7 @@ def off_basket(request: HttpRequest):
                                     host='localhost',
                                     port=5432,
                                     user='postgres',
-                                    password='week0497')
+                                    password='valera123')
 
     cursor = connect.cursor()
     shampoo_id = request.POST.get('shampoo_id', '')

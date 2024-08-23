@@ -3,12 +3,13 @@ from django.http import HttpRequest, HttpResponseRedirect
 from basket.database import DBConnect
 from catalog.fotos import ProductsContainer
 
+
 def main(request: HttpRequest):
     connect1 = DBConnect.get_connect_2(dbname='works',
-                                     host='localhost',
-                                     port=5432,
-                                     user='postgres',
-                                     password='week0497')
+                                       host='localhost',
+                                       port=5432,
+                                       user='postgres',
+                                       password='valera123')
 
     cursor = connect1.cursor()
     query = """ SELECT * FROM blonds
@@ -29,12 +30,13 @@ def main(request: HttpRequest):
 def redirect(request: HttpRequest):
     return render(request, '404.html')
 
+
 def likes(request: HttpRequest):
     connect = DBConnect.get_connect_3(dbname='works',
-                                    host='localhost',
-                                    port=5432,
-                                    user='postgres',
-                                    password='week0497')
+                                      host='localhost',
+                                      port=5432,
+                                      user='postgres',
+                                      password='valera123')
 
     cursor = connect.cursor()
     foto_id = request.POST.get('foto_id', '')
@@ -45,4 +47,3 @@ def likes(request: HttpRequest):
     cursor.close()
     connect.commit()
     return HttpResponseRedirect('/catalog/')
-

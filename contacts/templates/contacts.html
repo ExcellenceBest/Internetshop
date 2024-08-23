@@ -15,16 +15,30 @@
 {% endblock %}
 
 {% block content %}
+<form method="post" action="comment/" class="row g-3">
+    {% csrf_token %}
     <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Email address</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="@example.com">
+         <input  name="name" type="text" class="form-control"  placeholder="Ваше имя">
+
 </div>
 <div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label"><h3><p>Здесь вы можете оставить свой отзыв!!!</p></h3></label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <label  class="form-label"><h3><p>Здесь вы можете оставить свой отзыв!!!</p></h3></label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" name="comm" rows="3"></textarea>
 </div>
-    
-<div class="col">
-      <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6b66280b83cdf1611d547ce5796e33a51a5b5e1228da0a1fe5beb70106635ee7&width=759&height=543&lang=ru_RU&scroll=true"></script>
+
+         <div style="text-align: center">
+    <button  style="font-size: 30px" class="glow-on-hover" type="submit">Отправить</button>
+
+  </div>
+</form>
+<div style="text-align: center">
+<label  class="form-label"><h1><p style="color: blue"></p></h1></label>
     </div>
+                <div class="container">
+                    <div class="row">
+                        {% include "cont.html" %}
+                    </div>
+                </div>
 {% endblock %}
