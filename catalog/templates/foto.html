@@ -13,7 +13,7 @@
                       <h5 class="card-title">{{ product.title }}</h5>
                       <p class="card-text"> {{ product.description|slice:"0:100"|add:"..." }} </p>
                         <p style="color: blue">Время работы мастера: {{product.work_time}}  ч</p>
-                        <small class="text-muted">ID: {{product.foto_id}}</small>
+<!--                        <small class="text-muted">ID: {{product.foto_id}}</small>-->
                       <p class="card-text"><small class="text-muted">Рейтинг: {{product.counter}}</small></p>
                         <form method="POST" action="likes/">
                             {% csrf_token %}
