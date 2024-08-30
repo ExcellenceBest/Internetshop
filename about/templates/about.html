@@ -1,16 +1,61 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block logo %}
+<style>
+.social-icons-5 {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.social-icons-5 a {
+    text-decoration: none;
+    color: #fff;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0 6px;
+    font-size: 26px;
+    background: #337AB7;
+    transition: border-top-left-radius 0.1s linear 0s, border-top-right-radius 0.1s linear 0.1s, border-bottom-right-radius 0.1s linear 0.2s, border-bottom-left-radius 0.1s linear 0.3s;
+    transition: transform 0.4s linear 0s, border-top-left-radius 0.1s linear 0s, border-top-right-radius 0.1s linear 0.1s, border-bottom-right-radius 0.1s linear 0.2s, border-bottom-left-radius 0.1s linear 0.3s;
+    transition: transform 0.4s linear 0s, border-top-left-radius 0.1s linear 0s, border-top-right-radius 0.1s linear 0.1s, border-bottom-right-radius 0.1s linear 0.2s, border-bottom-left-radius 0.1s linear 0.3s;
+}
+.social-icons-5 a img {
+    width: 26px;
+    height: 26px;
+}
+.social-icons-5 a i,
+.social-icons-5 a img {
+    transition: transform 0.4s linear 0s;
+}
+.social-icons-5 a:hover {
+    transform: rotate(360deg);
+    border-radius: 50%;
+}
+.social-icons-5 a:hover i,
+.social-icons-5 a:hover img {
+    transform: rotate(-360deg);
+}
+</style>
+<ul class="social-icons-5">
+    <li><a href="https://vk.com/id148956169">VK<i class="fa fa-vk"></i></a></li>
+    <li><a href="#">OK<i class="fa fa-odnoklassniki"></i></a></li>
+    <li><a href="#">Telegram<i class="fa fa-telegram"></i></a></li>
+    <li><a href="#">Twitter<i class="fa fa-twitter"></i></a></li>
 
+</ul>
 {% endblock %}
 
 {% block localstyle %}
     <link href="{% static 'style/aboutstyle.css' %}" rel="stylesheet">
 {% endblock %}
      {% block title %}
-                <div class="d-flex justify-content-center"><h1> Немного о себе</h1></div>
 
             {% endblock %}
 
@@ -19,5 +64,26 @@
 {% endblock %}
 
 {% block content %}
+<div class="d-flex justify-content-center"><h1> Немного о себе</h1></div>
 
+<div class="container" style="background-color: #fefffede; background-color: #fefffede; border-radius: 10px; border: 2px solid blue">
+    <h1><p>Всем привет<br>
+Меня зовут Анастасия💥 и я дипломированный<br>
+Парикмахер-колорист-визажист<br>
+
+Хочу пригласить вас на такие процедуры как (Заволжский район):<br>
+🔹Окрашивания ( любой сложности);<br>
+🔹Стрижки ( женские, мужские);<br>
+🔹 Кератиновое выпрямление волос;<br>
+🔹Ботокс и нанопластика<br>
+🔹Скрытые и цветные окрашивания;<br>
+🔹Химическая завивка;<br>
+🔹Укладки и прически<br>
+🔹Профессиональный макияж<br>
+Я ЖДУ ИМЕННО ТЕБЯ❤️🔥<br>
+
+Каждому подписавшемуся на группу СКИДКА 10%</p></h1>
+    </div>
+<div class="container"><img src="https://bizprinting.ru/image/catalog/products/full_13013.jpg" style="margin-right: 100px; padding-top: 100px; max-width: 1000px; height:auto;">
+<img src="https://bizprinting.ru/image/catalog/products/full_13013.jpg" style="max-width: 1000px; height: auto;"></div>
 {% endblock %}
