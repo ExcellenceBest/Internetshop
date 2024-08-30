@@ -1,15 +1,25 @@
 {% for product in data %}
-          <div style="padding-top: 50px" class="col-4">
-            <div class="card mb-3" style="max-width: 540px; border: 2px solid blue">
-                <div style="margin-left: 100px" class="row g-0">
+<style>
+.zoom {
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  transform: scale(1.1);
+}
+</style>
+          <div style="padding-top: 50px;  padding-left: 50px" class="col-4">
+            <div class="card mb-3" style="max-width: 680px; height: 600px; background-color: #fefffede; border-radius: 50px; border: 2px solid blue">
+                <div style="margin-left: 50px" class="row g-0">
                   <div class="col-md-4">
                     <img src="https://avatars.mds.yandex.net/i?id=984a58be1a9c0c1f73c64c5b3b71c3475769ab76-12585840-images-thumbs&n=13">
                   </div>
                   <div class="col-md-12">
-                    <div class="card-body">
+                    <div class="zoom">
                       <h5 class="card-title">{{ product.title }}</h5>
                       <p class="card-text"> {{ product.description|slice:"0:100"|add:"..." }} </p>
                       <p class="card-text"><small class="text-muted">В корзине: {{product.quantity}}</small>
+                        <h3 class="card-title" style="color: blue">{{ product.price }} ₽</h3>
                           <form method="POST" action="off_basket/">
                             {% csrf_token %}
                           <button name="shampoo_id" value="{{product.shampoo_id}}" style="margin-left: 200px" type="submit" class="btn btn-outline-primary">Удалить</button>
